@@ -1,7 +1,7 @@
 document.body.innerHTML=
 `
 <main>
-        <h2>Tasks</h2>
+        <h2>To do list</h2>
             <input type="text" placeholder="Write your task here!" name="task"/>
             <button name="submit">CONFIRM</button>
         
