@@ -1,11 +1,12 @@
+*{color:white; font-family: "Roboto";}
+
 body
 {
     width: 99%;
-    height: 90vh;
-    background: 
-    linear-gradient(to left, rgb(58, 255, 140), rgb(214, 50, 255));
-    display: grid;
-    place-items: center;
+    height: 98vh;
+    background: #116D6E;
+    display: flex;
+    justify-content: center;
 }
 
 main
@@ -13,20 +14,45 @@ main
 
 box-sizing: border-box;
 padding: 10px;
-width:25%;
+width:25em;
 text-align: center;
-background-color: rgb(0, 0, 0);
+background-color: #321E1E;
 color:white;
-border-radius: 25%;
+
 }
 
 .task
 {
-    background-color: ghostwhite;
+    background-color: 4E3636;
     color: black;
     padding: 10px;
     margin-top: 6px;
     margin-bottom: 10px;
     margin-left: 10%;
     margin-right: 10%;
+    border: 1px solid #CD1818;
+}
+
+button, input{color:black; border: 0px; padding: 10px;}
+
+input:hover::placeholder{color: white;}
+input:hover{background-color: grey;}
+input:focus:hover{color: white;}
+
+button:hover
+{
+    border: 5px white;
+    background-color: gray;
+    color: white !important;
+    cursor: pointer;
+}
+
+img{width: 1rem;float: left; margin-top: 1px;}
+img:hover{content: url("images/delete.png");}
+
+.task > input 
+{
+    height: auto;
+    padding-top: -5px;
+    padding: 3px;
 }

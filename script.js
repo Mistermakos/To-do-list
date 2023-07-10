@@ -1,43 +1,43 @@
-const sub = document.getElementsByName("submit")[0];
 let Tasks = []; 
 
-//if you want to clear localstorage uncomment line below
+//if you want to clear localstorage uncomment line below (for reseting)
 //localStorage.clear();
 
-
-if (localStorage.getItem("Tasks") !== null)
-{    
-    Tasks = JSON.parse(localStorage.getItem("Tasks"))
-}
-
+//Adding tasks to list of tasks
 const add_task = (value) =>{
     return document.getElementById("all_tasks").innerHTML += 
         `
         <div class="task">
-            <button onclick="done(this)">Done</button>
-            <span>${value}</span>
+            <img src="images/unchecked.png" onclick="done(this)"/>
+            <div">${value}</div>
         </div>
         `
 }
 
-const print = () =>
-{
+//If there are any tasks in localstorage, it takes them to array, and prints them
+if (localStorage.getItem("Tasks") !== null)
+{    
+    Tasks = JSON.parse(localStorage.getItem("Tasks"))
     Tasks.forEach(element => {
         add_task(element);
     });
 }
-print();
 
+//Submiting form (adding tasks to list)
+const sub = document.getElementsByName("submit")[0];
 sub.onclick = () => 
 {
     let value = document.getElementsByName("task")[0].value;
-    if(Tasks.includes(value) == true){alert("Dont repeat yourself!");}
-    else{
-        Tasks.push(value); 
-        add_task(value)
+    if(value == ""){alert("You have to name your tasks!");}
+    else
+    {
+        if(Tasks.includes(value) == true){alert("Dont repeat yourself!");}
+        else{
+            Tasks.push(value); 
+            add_task(value)
+        }
     }
 }
-
  
 //when closing this will put every not done task into localstorage
 window.addEventListener("beforeunload", function(e){

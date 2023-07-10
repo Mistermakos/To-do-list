@@ -1,12 +1,13 @@
 document.body.innerHTML=
 `
-<main>
-        <h2>To do list</h2>
-            <input type="text" placeholder="Write your task here!" name="task"/>
-            <button name="submit">CONFIRM</button>
-        
-        <div id="all_tasks">
+    <main>
+        <h1>To do list</h1>
+            <div id="form">
+                <input type="text" placeholder="Write your task here!" name="task"/>
+                <button name="submit">CONFIRM</button>
+            </div>
+            <div id="all_tasks">
 
-        </div>
-</main>
+            </div>
+    </main>
 `
