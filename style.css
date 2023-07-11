@@ -48,11 +48,15 @@ button:hover
 }
 
 img{width: 1rem;float: left; margin-top: 1px;}
-img:hover{content: url("images/delete.png");}
+img:hover{content: url("images/delete.png"); cursor: pointer;}
 
 .task > input 
 {
     height: auto;
     padding-top: -5px;
     padding: 3px;
+    background-color: #321E1E;
+    border: none;
+    color: white;
 }
+

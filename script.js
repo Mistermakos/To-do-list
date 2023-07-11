@@ -9,7 +9,7 @@ const add_task = (value) =>{
         `
         <div class="task">
             <img src="images/unchecked.png" onclick="done(this)"/>
-            <div">${value}</div>
+            <div ondblclick="change(this)">${value}</div>
         </div>
         `
 }
@@ -51,3 +51,32 @@ const done = (c) =>
     c.parentNode.remove();
 }  
 
+const replace = (c) => 
+{
+    let new_task = c.value;
+    c.parentNode.children[1].textContent = new_task;
+    c.parentNode.children[1].style.display = "block";
+    c.parentNode.children[2].blur(); // it deletes annying but that occured sometimes
+    c.remove();
+}
+
+const check_key = (c,key) => 
+{
+    // enter = 13
+    if(key.keyCode == 13)
+    {
+        replace(c);
+        return 0;
+    }
+}
+ 
+const input_focus = (c) => 
+{
+    c.focus();
+}
+
+const change = (c) => 
+{
+    c.style.display = "none";
+    c.parentNode.innerHTML+= `<input value="${c.textContent}" onfocusout="replace(this)" onmouseover="input_focus(this)" onkeypress="check_key(this, event)"/>`
+}
