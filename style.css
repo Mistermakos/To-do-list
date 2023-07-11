@@ -9,7 +9,7 @@ body
     justify-content: center;
 }
 
-main
+.main
 {
 
 box-sizing: border-box;
@@ -47,8 +47,8 @@ button:hover
     cursor: pointer;
 }
 
-img{width: 1rem;float: left; margin-top: 1px;}
-img:hover{content: url("images/delete.png"); cursor: pointer;}
+.task > img{width: 1rem;float: left; margin-top: 1px;}
+.task > img:hover{content: url("images/delete.png"); cursor: pointer;}
 
 .task > input 
 {
@@ -60,3 +60,7 @@ img:hover{content: url("images/delete.png"); cursor: pointer;}
     color: white;
 }
 
+.clickable
+{
+    cursor: pointer;
+}

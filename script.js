@@ -4,12 +4,12 @@ let Tasks = [];
 //localStorage.clear();
 
 //Adding tasks to list of tasks
-const add_task = (value) =>{
+const print_task = (value) =>{
     return document.getElementById("all_tasks").innerHTML += 
         `
         <div class="task">
             <img src="images/unchecked.png" onclick="done(this)"/>
-            <div ondblclick="change(this)">${value}</div>
+            <div ondblclick="change(this)" class="clickable">${value}</div>
         </div>
         `
 }
@@ -19,13 +19,12 @@ if (localStorage.getItem("Tasks") !== null)
 {    
     Tasks = JSON.parse(localStorage.getItem("Tasks"))
     Tasks.forEach(element => {
-        add_task(element);
+        print_task(element);
     });
 }
 
 //Submiting form (adding tasks to list)
-const sub = document.getElementsByName("submit")[0];
-sub.onclick = () => 
+const add_task = () => 
 {
     let value = document.getElementsByName("task")[0].value;
     if(value == ""){alert("You have to name your tasks!");}
@@ -34,9 +33,10 @@ sub.onclick = () =>
         if(Tasks.includes(value) == true){alert("Dont repeat yourself!");}
         else{
             Tasks.push(value); 
-            add_task(value)
+            print_task(value)
         }
     }
+    document.getElementsByName("task")[0].value = ""
 }
  
 //when closing this will put every not done task into localstorage
@@ -54,9 +54,11 @@ const done = (c) =>
 const replace = (c) => 
 {
     let new_task = c.value;
-    c.parentNode.children[1].textContent = new_task;
-    c.parentNode.children[1].style.display = "block";
-    c.parentNode.children[2].blur(); // it deletes annying but that occured sometimes
+    let nodes = c.parentNode.children;
+    Tasks[Tasks.indexOf(nodes[1].textContent)] = new_task
+    nodes[1].textContent = new_task;
+    nodes[1].style.display = "block";
+    nodes[2].blur(); // it deletes annying bug that occured sometimes
     c.remove();
 }
 
