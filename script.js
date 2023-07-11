@@ -58,7 +58,7 @@ const replace = (c) =>
     Tasks[Tasks.indexOf(nodes[1].textContent)] = new_task
     nodes[1].textContent = new_task;
     nodes[1].style.display = "block";
-    nodes[2].blur(); // it deletes annying bug that occured sometimes
+    nodes[2].blur(); // it deletes annoying bug that occured sometimes
     c.remove();
 }
 
@@ -71,14 +71,9 @@ const check_key = (c,key) =>
         return 0;
     }
 }
- 
-const input_focus = (c) => 
-{
-    c.focus();
-}
 
 const change = (c) => 
 {
     c.style.display = "none";
-    c.parentNode.innerHTML+= `<input value="${c.textContent}" onfocusout="replace(this)" onmouseover="input_focus(this)" onkeypress="check_key(this, event)"/>`
+    c.parentNode.innerHTML+= `<input value="${c.textContent}" onfocusout="replace(this)" onmouseover="this.focus()" onkeypress="check_key(this, event)"/>`
 }
