@@ -6,7 +6,7 @@ document.body.innerHTML=
         </header>
             <div id="form">
                 <input type="text" placeholder="Write your task here!" name="task" onkeypress="confirm(event)"/>
-                <button name="submit" onclick = "add_task()">CONFIRM</button>
+                <button onclick = "add_task()">CONFIRM</button>
             </div>
             <div id="all_tasks">
             </div>
