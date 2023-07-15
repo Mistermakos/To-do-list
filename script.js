@@ -3,56 +3,41 @@ let Tasks = [];
 //if you want to clear localstorage uncomment line below (for reseting)
 //localStorage.clear();
 
-//Adding tasks to list of tasks
-const print_task = (value) =>{
-    return document.getElementById("all_tasks").innerHTML += 
-        `
-        <div class="task">
-            <img src="images/unchecked.png" onclick="done(this)"/>
-            <div ondblclick="change(this)" class="clickable">${value}</div>
-        </div>
-        `
-}
-
-//If there are any tasks in localstorage, it takes them to array, and prints them
-if (localStorage.getItem("Tasks") !== null)
-{    
-    Tasks = JSON.parse(localStorage.getItem("Tasks"))
-    Tasks.forEach(element => {
-        print_task(element);
-    });
-}
-
-const check_value = (value) =>
-{
-    if(Tasks.includes(value) == true){
-        return false;
-    }
-    else
-    {
-        return true;
-    }
-}
-
-//Submiting form (adding tasks to list)
-const add_task = () => 
-{
-    let value = document.getElementsByName("task")[0].value;
-    if(value == ""){alert("You have to name your tasks!");}
-    else
-    {
-        if(check_value(value)){
-            Tasks.push(value); 
-            print_task(value)
-        }
-    }
-    document.getElementsByName("task")[0].value = ""
-}
- 
 //when closing this will put every not done task into localstorage
 window.addEventListener("beforeunload", function(e){
     localStorage.setItem("Tasks",JSON.stringify(Tasks));
 },false);
+
+const add_task = () => 
+{
+    let value = document.getElementsByName("task")[0].value;
+    if(!(check_value(value))){modify(value);Tasks.push(value);document.getElementsByName("task")[0].value = "";}
+}
+
+const check_value = (value) =>
+{
+    if (value == ""){return true}
+    return Tasks.includes(value)
+}
+
+const modify = (value) => 
+{
+    return document.getElementById("all_tasks").innerHTML += `
+    <div class="task">
+        <img src="images/unchecked.png" onclick="done(this)"/>
+        <div ondblclick="change(this)" class="clickable">${value}</div>
+    </div>
+    `
+}
+
+// //If there are any tasks in localstorage, it takes them to array, and prints them
+if (localStorage.getItem("Tasks") !== null)
+{    
+    Tasks = JSON.parse(localStorage.getItem("Tasks"))
+    Tasks.forEach(element => {
+        modify(element);
+    });
+}
 
 const done = (c) =>
 {
@@ -63,17 +48,13 @@ const done = (c) =>
 
 const replace = (c) => 
 {
-    let new_task = c.value;
-    if(check_value(new_task))
+    if(!(check_value(c.value)))
     {
-        let nodes = c.parentNode.children;
-        Tasks[Tasks.indexOf(nodes[1].textContent)] = new_task
-        nodes[1].textContent = new_task;
-        nodes[1].style.display = "block";
-        nodes[2].blur(); // it deletes annoying bug that occured sometimes
-        c.remove();
+        Tasks[Tasks.indexOf(c.parentNode.children[1].textContent)] = c.value;
+        let val = c.value;
+        c.parentNode.remove();
+        modify(val);
     }
-    else{ c.blur(); return 0;}
 }
 
 const check_key = (c,key) => 
@@ -87,7 +68,4 @@ const check_key = (c,key) =>
 }
 
 const change = (c) => 
-{
-    c.style.display = "none";
-    c.parentNode.innerHTML+= `<input value="${c.textContent}" onfocusout="replace(this)" onmouseover="this.focus()" onkeypress="check_key(this, event)"/>`
-}
+{c.parentNode.innerHTML+= `<input value="${c.textContent}" onfocusout="replace(this)" onmouseover="this.focus()" onkeypress="check_key(this, event)"/>`}
